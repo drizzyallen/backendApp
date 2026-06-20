@@ -1,0 +1,6 @@
+#we store files we do not want docker image to copy
+node_modules
+
+
+browsing_history
+.env
