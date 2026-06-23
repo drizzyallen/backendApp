@@ -1,15 +1,18 @@
 import express from 'express'
-
+import giftsRouter from './routes/gifts.js'
 const app = express()
 
 //serve the files from the client/public directory, this is the middleware function to serve static files form the public directory
 app.use('/public', express.static('./public'))
 
-//serve the files form the client/public/scripts directory, this the middleware fucntion to serve static files from the scripts directory
+//serve the files from the client/public/scripts directory, this the middleware fucntion to serve static files from the scripts directory
 app.use('scripts', express.static('./public/scripts'))
 
+//serve the /gifts endpoint to the app from the server/routes/gifts.js
+app.use('/gifts', giftsRouter)
+
 //defined a route for the root URL of the server with parameters req and res. This quickly helps us see that our server is working and responding correctly when we start it
-app.get('/', (res, req) => {
+app.get('/', (req, res) => {
     res.status(200).send('<h1 style="text-align: center; margin-top: 50px;">backend API</h1>')
 }) 
 
