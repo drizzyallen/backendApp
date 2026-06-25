@@ -1,15 +1,17 @@
 import express from 'express'
+import './config/dotenv.js'
+import cors from 'cors'
 import giftsRouter from './routes/gifts.js'
-const app = express()
 
-//serve the files from the client/public directory, this is the middleware function to serve static files form the public directory
-app.use('/public', express.static('./public'))
+const app = express() //an app object is returned! Think of this as the main app.   
+//when router = express.Router() is called, a slightly different mini app is returned. The idea behind the mini app is that each route in your app can become quite complicated, and 
+//you'd benefit from moving all that code into a separate file. Each file's router becomes a mini app, which has a very similiar structure to the main app
 
-//serve the files from the client/public/scripts directory, this the middleware fucntion to serve static files from the scripts directory
-app.use('scripts', express.static('./public/scripts'))
+// cors middleware
+app.use(cors())
 
 //serve the /gifts endpoint to the app from the server/routes/gifts.js
-app.use('/gifts', giftsRouter)
+app.use('/gifts', giftsRouter) //global middleware
 
 //defined a route for the root URL of the server with parameters req and res. This quickly helps us see that our server is working and responding correctly when we start it
 app.get('/', (req, res) => {
